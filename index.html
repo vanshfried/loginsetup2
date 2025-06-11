@@ -1,270 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Power BI Login</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Power BI Login</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="preload" href="images/cranebuilding.jpg" as="image" />
+  <link rel="preload" href="head-logo.png" as="image" />
+  <style>
+    :root {
+      --teal: #008080;
+      --teal-dark: #005f5f;
+      --bg-glass: rgba(255, 255, 255, 0.12);
+      --white-glass: rgba(255, 255, 255, 0.9);
+      --border-glass: rgba(255, 255, 255, 0.3);
+      --text-dark: #222;
+      --text-muted: #555;
+      --font: 'Segoe UI', sans-serif;
+    }
 
-    <!-- Preload key images to reduce CLS -->
-    <link rel="preload" href="images/cranebuilding.jpg" as="image" />
-    <link rel="preload" href="head-logo.png" as="image" />
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <!-- Favicons -->
-    <link rel="icon" href="images/logo.png" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    html, body {
+      height: 100%;
+      font-family: var(--font);
+      background: url("images/cranebuilding.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-dark);
+    }
 
-      html,
-      body {
-        height: 100%;
-        font-family: "Segoe UI", sans-serif;
-        background: url("images/cranebuilding.jpg") no-repeat center center
-          fixed;
-        background-size: cover;
-      }
+    body {
+      display: flex;
+      flex-direction: column;
+    }
 
-      body {
-        display: flex;
+    .navbar {
+      background-color: var(--white-glass);
+      height: 60px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .navbar img {
+      height: 42px;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: var(--bg-glass);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      max-width: 850px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .left-panel {
+      flex: 1;
+      background: linear-gradient(135deg, var(--teal), #006060);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6em;
+      font-weight: 600;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .right-panel {
+      flex: 1;
+      background-color: var(--white-glass);
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .right-panel img.logo {
+      width: 70px;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      background-color: #f9f9f9;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--teal);
+      background-color: #fff;
+    }
+
+    .forgot-password {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: right;
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    .forgot-password:hover {
+      color: var(--teal-dark);
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px;
+      background-color: var(--teal);
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: var(--teal-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--white-glass);
+      backdrop-filter: blur(5px);
+      border-top: 1px solid #ccc;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--teal);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--teal-dark);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .card {
         flex-direction: column;
-        min-height: 100vh;
-      }
-
-      .navbar {
-        position: sticky;
-        top: 0;
-        background-color: rgba(255, 255, 255, 0.9);
-        height: 56px;
-        display: flex;
-        align-items: center;
-        padding: 0 2rem;
-        border-bottom: 1px solid #ddd;
-        z-index: 1000;
-        backdrop-filter: blur(5px);
-      }
-
-      .nav-logo {
-        height: 40px;
-      }
-
-      .main-content {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem 1rem;
-      }
-
-      .container {
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 20px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        max-width: 800px;
-        overflow: hidden;
       }
 
       .left-panel {
-        flex: 1;
-        background: rgba(0, 100, 100, 0.7);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         padding: 1.5rem;
-        font-size: 1.6em;
-        font-weight: 600;
-        text-align: center;
+        font-size: 1.3em;
       }
 
       .right-panel {
-        flex: 1;
-        background-color: rgba(255, 255, 255, 0.9);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem 1rem;
+        padding: 2rem 1.5rem;
       }
 
-      .logo {
-        width: 70px;
-        margin-bottom: 1rem;
+      .right-panel img.logo {
+        width: 60px;
       }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <img src="head-logo.png" alt="Logo" />
+  </nav>
 
-      .form-group {
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 1rem;
-      }
-
-      .form-group label {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        display: block;
-        color: #333;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #aaa;
-        border-radius: 8px;
-        background-color: #f8f8f8;
-      }
-
-      .forgot-password {
-        font-size: 0.85rem;
-        color: #555;
-        text-align: right;
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 1rem;
-      }
-
-      .login-btn {
-        background-color: #008080;
-        color: white;
-        padding: 10px 20px;
-        font-size: 1rem;
-        border: none;
-        border-radius: 8px;
-        width: 100%;
-        max-width: 300px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .login-btn:hover {
-        background-color: #005f5f;
-      }
-
-      .footer {
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 20px 10px;
-        text-align: center;
-        border-top: 1px solid #ccc;
-        backdrop-filter: blur(5px);
-      }
-
-      .footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 10px;
-      }
-
-      .footer-links a {
-        color: #008080;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.3s;
-      }
-
-      .footer-links a:hover {
-        color: #004d4d;
-      }
-
-      .footer-copy {
-        font-size: 0.8rem;
-        color: #444;
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          flex-direction: column;
-        }
-
-        .left-panel {
-          border-radius: 20px 20px 0 0;
-          font-size: 1.3em;
-        }
-
-        .logo {
-          width: 60px;
-        }
-      }
-
-      @media (max-height: 500px) {
-        .main-content {
-          align-items: flex-start;
-        }
-
-        .container {
-          min-height: auto;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <img src="head-logo.png" alt="Logo" class="nav-logo" />
-    </nav>
-
-    <div class="main-content">
-      <div class="container">
-        <div class="left-panel">Power BI Dashboard Login</div>
-        <div class="right-panel">
-          <img src="head-logo.png" alt="GET Logo" class="logo" />
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" id="email" placeholder="User Name" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" />
-          </div>
-          <div class="forgot-password">Forgot Password?</div>
-          <button class="login-btn">LOGIN</button>
+  <main class="main-content">
+    <section class="card" aria-labelledby="login-title">
+      <div class="left-panel" id="login-title">
+        Power BI Dashboard Login
+      </div>
+      <div class="right-panel">
+        <img src="head-logo.png" alt="Company Logo" class="logo" />
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" placeholder="example@domain.com" required />
         </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" required />
+        </div>
+        <div class="forgot-password">Forgot Password?</div>
+        <button class="login-btn" type="button">Login</button>
       </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://getglobalgroup.com/about-get/">About</a>
+      <a href="https://getglobalgroup.com/">Services</a>
+      <a href="https://getglobalgroup.com/contact-us/">Contact</a>
+      <a href="https://getglobalgroup.com/get-crew-app-privacy-policy/">Privacy</a>
+      <a href="https://getglobalgroup.com/terms-and-conditions/">Terms</a>
     </div>
+    <div class="footer-copy">&copy; 2025 GET Solutions. All rights reserved.</div>
+  </footer>
 
-    <footer class="footer">
-      <div class="footer-links">
-        <a href="https://getglobalgroup.com/about-get/">About</a>
-        <a href="https://getglobalgroup.com/">Our Services</a>
-        <a href="https://getglobalgroup.com/contact-us/">Contact</a>
-        <a href="https://getglobalgroup.com/get-crew-app-privacy-policy/"
-          >Privacy Policy</a
-        >
-        <a href="https://getglobalgroup.com/terms-and-conditions/">Terms</a>
-      </div>
-      <div class="footer-copy">
-        &copy; 2025 GET Solutions. All rights reserved.
-      </div>
-    </footer>
-    <script>
-      document
-        .querySelector(".login-btn")
-        .addEventListener("click", async () => {
-          const email = document.getElementById("email").value;
-          const password = document.getElementById("password").value;
+  <script>
+    document.querySelector(".login-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-          const response = await fetch("/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          });
-
-          const data = await response.json();
-          if (data.success) {
-            window.location.href = "https://youtube.com";
-          } else {
-            alert("Login failed: " + data.message);
-          }
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
         });
-    </script>
-  </body>
+
+        const result = await response.json();
+        if (result.success) {
+          window.location.href = "https://youtube.com";
+        } else {
+          alert("Login failed: " + result.message);
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Unexpected error occurred.");
+      }
+    });
+  </script>
+</body>
 </html>
