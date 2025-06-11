@@ -23,11 +23,23 @@
     html, body {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      background: url("images/cranebuilding.jpg") no-repeat center center fixed;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Fixed Background using ::before pseudo-element */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url("images/cranebuilding.jpg") no-repeat center center;
       background-size: cover;
-      display: flex;
-      flex-direction: column;
-      color: var(--text-dark);
+      background-attachment: fixed;
+      z-index: -1;
     }
 
     .navbar {
@@ -54,6 +66,7 @@
       justify-content: center;
       align-items: center;
       padding: 2rem 1rem;
+      min-height: calc(100vh - 56px - 60px); /* Account for navbar + footer */
     }
 
     .container {
